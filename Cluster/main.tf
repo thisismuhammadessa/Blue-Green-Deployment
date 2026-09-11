@@ -152,12 +152,24 @@ resource "azurerm_kubernetes_cluster" "devopsshack" {
 
   dns_prefix = "devopsshack"
 
-  # Free tier is suitable for practice
+  # Free tier for practice
   sku_tier = "Free"
 
+  # -------------------------------------------------------
   # Managed Identity
+  # -------------------------------------------------------
+
   identity {
     type = "SystemAssigned"
+  }
+
+  # -------------------------------------------------------
+  # Node Provisioning
+  # Required by current AzureRM provider
+  # -------------------------------------------------------
+
+  node_provisioning_profile {
+    mode = "Auto"
   }
 
   # -------------------------------------------------------
@@ -169,7 +181,7 @@ resource "azurerm_kubernetes_cluster" "devopsshack" {
 
     node_count = 3
 
-    # Similar to AWS t2.large
+    # Similar size to AWS t2.large
     vm_size = "Standard_D2s_v5"
 
     vnet_subnet_id = azurerm_subnet.devopsshack_subnet_1.id
@@ -209,3 +221,4 @@ resource "azurerm_kubernetes_cluster" "devopsshack" {
     azurerm_subnet_network_security_group_association.subnet_1
   ]
 }
+
