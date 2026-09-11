@@ -1,6 +1,21 @@
-variable "ssh_key_name" {
-  description = "The name of the SSH key pair to use for instances"
+variable "subscription_id" {
+  description = "Azure Subscription ID"
   type        = string
-  default     = "DevOps-Shack"
 }
 
+variable "location" {
+  description = "Azure region"
+  type        = string
+  default     = "Central India"
+}
+
+variable "admin_username" {
+  description = "AKS Linux admin username"
+  type        = string
+  default     = "azureuser"
+}
+
+variable "ssh_public_key_path" {
+  description = "Path to SSH public key"
+  type        = string
+}
