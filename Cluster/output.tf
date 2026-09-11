@@ -1,16 +1,18 @@
 output "cluster_id" {
-  value = aws_eks_cluster.devopsshack.id
+  value = azurerm_kubernetes_cluster.devopsshack.id
 }
 
-output "node_group_id" {
-  value = aws_eks_node_group.devopsshack.id
+output "node_pool_name" {
+  value = azurerm_kubernetes_cluster.devopsshack.default_node_pool[0].name
 }
 
-output "vpc_id" {
-  value = aws_vpc.devopsshack_vpc.id
+output "vnet_id" {
+  value = azurerm_virtual_network.devopsshack_vnet.id
 }
 
 output "subnet_ids" {
-  value = aws_subnet.devopsshack_subnet[*].id
+  value = [
+    azurerm_subnet.devopsshack_subnet_1.id,
+    azurerm_subnet.devopsshack_subnet_2.id
+  ]
 }
-
